@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 struct node{
+    // ensure values are non-negative integers
     unsigned dist[20];
     unsigned from[20];
 }rt[20];
