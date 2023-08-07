@@ -19,21 +19,22 @@ int main(int argc, char* argv[])
     else
         printf("socket created\n");
 
-    // set server's address and port number
+    // set server's address and port number 
+    // # port number is at 2nd index
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(atoi(argv[1]));
+    server.sin_port = htons(atoi(argv[2]));
 
     // read message form user using fgets() & store it in buffer
-    char buff[100];
+    char buffer[100];
     printf("enter message to be sent to server : ");
-    fgets(buff,100,stdin);
-    printf("message entered: %s\n",buff);
 
+    fgets(buffer,100,stdin);
+    printf("message entered: %s\n",buffer);
+    
     // send message to server using sendto(socket,buff,size,flag,dest_addr,dest_len) & then terminate
-    if (sendto(sockfd, buff, sizeof(buff), 0, (struct sockaddr*)&server, sizeof(server)) < 0) {
-        printf("error in sendto");
-    }
+    if(sendto(sockfd,buffer,sizeof(buffer),0,(struct sockaddr*)&server,sizeof(server))<0)
+        printf("Error in sendto");
     else
         printf("message sent successfully\n");
 
